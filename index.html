@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to write "lucmsilva"</title>
+  <style>
+    body {
+      background-color: black;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="post-link" src="https://blog.eleu.me/posts/how-to-write-lucmsilva/"></iframe>
+  <script>
+    const urlToCheck = 'https://blog.eleu.me/posts/how-to-write-lucmsilva/';
+    const fallbackUrl = 'https://blog.eleu.me/2024/08/14/how-to-write-lucmsilva.html';
+    function checkLinkAndLoad(url) {
+      fetch(url, { method: 'HEAD' })
+        .then(response => {
+          const iframe = document.getElementById('post-link');
+          if (response.ok) {
+            iframe.src = url;
+            monitorIframe(url, fallbackUrl);
+          } else {
+            iframe.src = fallbackUrl;
+            monitorIframe(fallbackUrl, fallbackUrl);
+          }
+        })
+        .catch(error => {
+          document.getElementById('post-link').src = fallbackUrl;
+          monitorIframe(fallbackUrl, fallbackUrl);
+        });
+    }
+    function monitorIframe(validUrl, fallbackUrl) {
+      const iframe = document.getElementById('post-link');
+      setInterval(() => {
+        const currentUrl = iframe.contentWindow.location.href;
+        if (currentUrl !== validUrl && currentUrl !== fallbackUrl) {
+          iframe.src = iframe.src === validUrl ? validUrl : fallbackUrl;
+        }
+      }, 500);
+    }
+    checkLinkAndLoad(urlToCheck);
+  </script>
+</body>
+</html>
